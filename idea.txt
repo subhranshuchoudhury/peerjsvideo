@@ -1,0 +1,12 @@
+video call app :
+
+"/" --> login check, !--> rigister form redirect(using axios) , true --> video room.
+
+"/videoroom" --> get useremail using passport. and grab the connection ID of that current user. and save() to mongodb.
+
+"Add video mute and audio mute button" --> user js page.
+
+-- POST --
+
+/register --> register the user using the email id and otp verification, add password if needed.
+/login --> check the user if he loggedin before if not then create a new login session.

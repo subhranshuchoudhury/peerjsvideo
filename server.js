@@ -3,25 +3,198 @@
 
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
+require("dotenv").config();
 const express = require("express");
-
-const { ExpressPeerServer } = require("peer");
-
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+const mongoose = require("mongoose");
+const mailer = require("nodemailer");
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 const app = express();
+const { ExpressPeerServer } = require("peer");
+// For time-stamp in chat.
+
+function timestamp() {
+    let d = new Date();
+    let ISTTime = new Date(d.getTime() + (330 + d.getTimezoneOffset()) * 60000);
+    let timeStamp = `[${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours() >= 12 ? "PM" : "AM"} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} IST]`;
+    return timeStamp;
+}
+
+smtpProtocol = mailer.createTransport({
+    host: "smtp-relay.sendinblue.com",
+    port: 587,
+    auth: {
+        user: "subhransuchoudhury00@gmail.com",
+        pass: process.env.MAIL_PASS,
+    }
+});
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
-
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-    response.sendFile(__dirname + "/views/index.html");
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false
+    // cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+mongoose.connect(process.env.DB_URL);
+
+const userSkeliton = new mongoose.Schema({
+    email: String,
+    password: String
+}); // schema
+
+const PeerSchema = new mongoose.Schema({
+    email: String,
+    peerID: String,
+
 });
 
+userSkeliton.plugin(passportLocalMongoose);
+
+const Peer = new mongoose.model("peer", PeerSchema);
+const User = new mongoose.model("user", userSkeliton);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => { res.header({ "Access-Control-Allow-Origin": "*" }); next(); })
+
+//..
+app.get("/home", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render("home");
+
+    } else {
+        res.redirect("register");
+
+    }
+
+});
+
+// register
+
+app.post("/register", (req, res) => {
+
+    User.register({ username: req.body.username }, req.body.password, (err, u) => {
+        if (err) {
+            console.log(err);
+            res.redirect("/register");
+        } else {
+            passport.authenticate("local")(req, res, () => {
+                res.redirect("/home");
+            });
+        }
+    });
+
+
+});
+
+app.get("/register", (req, res) => {
+    res.render("register");
+});
+
+// Login
+
+app.get("/login", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect("/home");
+    } else {
+        res.render("login");
+
+    }
+});
+
+app.post("/login", (req, res) => {
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    req.login(user, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate("local")(req, res, () => {
+                res.redirect("/home");
+            });
+        }
+    });
+
+});
+
+// set the peer id
+
+app.post("/update-peer", (req, res) => {
+    if (isAuthenticated) {
+        const newPeer = new Peer({
+            email: req.user.username,
+            peerID: req.body.peerID
+        });
+
+        newPeer.save((err) => {
+            if (err) {
+                res.send(err);
+            } else {
+                console.log("Peer ID created.");
+            }
+
+        });
+    } else {
+        res.send("Authorization Failed.");
+    }
+
+});
+
+// OTP
+
+app.post("/sendotp", (req, res) => {
+    const OTP = req.body.otp;
+    const Email = req.body.emailid;
+    const Pass = req.body.password;
+    console.log("Here OTP: " + OTP + " Email: " + Email);
+
+    // nodemailer
+    let mailoption = {
+        from: "subhransuchoudhury00@gmail.com",
+        to: Email,
+        subject: "VideoTalk OTP Verification",
+        html: `Hi, Thanks for using our service.<br>Here is your OTP: <h2>${OTP}</h2>Your Password is: ${Pass}`
+    }
+    smtpProtocol.sendMail(mailoption, function (err, response) {
+        if (err) {
+            console.log(err);
+        }
+        console.log('Message Sent');
+    });
+    smtpProtocol.close();
+});
+
+
+// test -- ignore
+
+app.post("/test", (req, res) => {
+    console.log("Email: " + req.body.username)
+    console.log("Password: " + req.body.password)
+    res.render("home");
+})
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, () => {
     console.log("Your app is listening on port " + listener.address().port);
 });
+
+//******************************************************************
 
 // peerjs server
 const peerServer = ExpressPeerServer(listener, {

@@ -24,6 +24,14 @@ let peer = new Peer({
 });
 peer.on('open', (id) => {
     logMessage('My peer ID is: ' + id);
+    $(document).ready(function () {
+        $.post("/update-peer",
+            {
+                peerId: id
+            },
+            function (data, status) {
+            });
+    });
 });
 peer.on('error', (error) => {
     console.error(error);
@@ -36,7 +44,7 @@ peer.on('connection', (conn) => {
         logMessage(`received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('hello!');
+        conn.send('--> User Connected.');
     });
 });
 
@@ -62,7 +70,7 @@ let connectToPeer = () => {
         logMessage(`received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('hi!');
+        conn.send('--> User Connected.');
     });
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })

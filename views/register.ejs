@@ -1,0 +1,109 @@
+<%- include('partials/header') %>
+    <div class="container mt-5">
+        <h1>Account Register</h1>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- Makes POST request to /register route -->
+                        <form onsubmit="return false">
+                            <div class="form-group">
+                                <label for="username">Email ID:</label>
+                                <input type="email" class="form-control" id="Email" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="Pass" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="otp">OTP:</label>
+                                <input type="number" class="form-control" name="otp" id="userinputOTP">
+                            </div>
+                            <button id="submit" class="btn btn-dark">Register</button>
+                            <button id="verifyOTP" class="btn btn-dark">Verify OTP</button>
+                            <button id="letsgo" class="btn btn-dark">Lets Go!</button>
+                            <button id="sendOTP" class="btn btn-dark">Send OTP!</button>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("submit").style.display = "none";
+        document.getElementById("letsgo").style.display = "none";
+        document.getElementById("userinputOTP").style.display = "none";
+        document.getElementById("verifyOTP").style.display = "none";
+        let emailid = document.getElementById("Email");
+        let password = document.getElementById("Pass");
+        const OTP = parseInt(Math.random() * 9999 + 1111);
+        // ajax
+        $(document).ready(function () {
+            $("#sendOTP").click(function () {
+                document.getElementById("userinputOTP").style.display = "";
+                document.getElementById("sendOTP").style.display = "none";
+
+                $.post("/sendotp",
+                    {
+                        otp: OTP,
+                        emailid: emailid.value,
+                        password: password.value
+                    },
+                    function (data, status) {
+                    });
+                document.getElementById("verifyOTP").style.display = "";
+
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            $("#verifyOTP").click(function () {
+                // otp verification
+
+                if (document.getElementById("userinputOTP").value == OTP) {
+                    document.getElementById("submit").style.display = "";
+                    document.getElementById("verifyOTP").style.display = "none";
+                    alert("Correct OTP. :)");
+                    $.post("/register",
+                        {
+                            username: emailid.value,
+                            password: password.value
+                        },
+                        function (data, status) {
+                        });
+                } else {
+                    alert("Incorrect OTP. Kindly check your inbox or Email ID!");
+                }
+
+
+            });
+        });
+
+        // register -- already in verify otp
+        // $(document).ready(function () {
+        //     $("#submit").click(function () {
+        //         $.post("/test",
+        //             {
+        //                 username: emailid.value,
+        //                 password: password.value
+        //             },
+        //             function (data, status) {
+        //             });
+        //     });
+        // });
+
+
+    </script>
+
+    <%- include('partials/footer') %>
