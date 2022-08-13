@@ -27,7 +27,7 @@ peer.on('open', (id) => {
     $(document).ready(function () {
         $.post("/update-peer",
             {
-                peerId: id
+                peerId: id,
             },
             function (data, status) {
             });

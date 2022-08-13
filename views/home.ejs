@@ -1,4 +1,32 @@
-<%- include('partials/header') %>
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Welcome to Glitch!</title>
+
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- import libraries -->
+    <script src="/lib/peerjs.js"></script>
+
+    <!-- https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js -->
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/main.js" type="module"></script>
+</head>
+
+<body>
 
     <video class="remote-video" autoplay></video>
     <input type="text" id="connect-to-peer" />
