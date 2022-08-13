@@ -27,7 +27,7 @@ peer.on('open', (id) => {
     console.log("Peer ID: " + id)
     $.post("/update-peer",
         {
-            peerId: id,
+            peerId: "" + id
         },
         function (data, status) {
         });

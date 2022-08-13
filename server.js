@@ -55,7 +55,7 @@ const userSkeliton = new mongoose.Schema({
 
 const PeerSchema = new mongoose.Schema({
     email: String,
-    peerID: String,
+    peerID: String
 
 });
 
