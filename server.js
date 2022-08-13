@@ -138,19 +138,29 @@ app.post("/login", (req, res) => {
 
 app.post("/update-peer", (req, res) => {
     if (req.isAuthenticated()) {
-        const newPeer = new Peer({
-            email: req.user.username,
-            peer: req.body.peerid
-        });
 
-        newPeer.save((err) => {
-            if (err) {
-                res.send(err);
+        Peer.findOne({ email: req.user.username }, (err, data) => {
+            if (data) {
+                data.peer = req.body.peerid;
             } else {
-                console.log("Peer ID created.");
-            }
+                if (!err) {
+                    const newPeer = new Peer({
+                        email: req.user.username,
+                        peer: req.body.peerid
+                    });
 
-        });
+                    newPeer.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            console.log("Peer ID created.");
+                        }
+
+                    });
+                }
+            }
+        })
+
     } else {
         res.send("Authorization Failed.");
     }
