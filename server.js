@@ -50,7 +50,8 @@ mongoose.connect(process.env.DB_URL);
 
 const userSkeliton = new mongoose.Schema({
     email: String,
-    password: String
+    password: String,
+    time: String
 }); // schema
 
 const PeerSchema = new mongoose.Schema({
@@ -139,7 +140,7 @@ app.post("/update-peer", (req, res) => {
 
         Peer.findOne({ email: req.user.username }, (err, data) => {
             if (data) {
-                Peer.updateOne({ email: req.user.username }, { $set: { peer: req.body.peerid } }, (err) => {
+                Peer.updateOne({ email: req.user.username }, { $set: { peer: req.body.peerid, time: timestamp() } }, (err) => {
                     if (err) {
                         res.send(err);
                         console.log("Error! PUT method");
@@ -152,7 +153,8 @@ app.post("/update-peer", (req, res) => {
                 if (!err) {
                     const newPeer = new Peer({
                         email: req.user.username,
-                        peer: req.body.peerid
+                        peer: req.body.peerid,
+                        time: timestamp()
                     });
 
                     newPeer.save((err) => {
@@ -174,6 +176,18 @@ app.post("/update-peer", (req, res) => {
     }
 
 });
+
+// get the peer ids
+
+app.get("/peers", (req, res) => {
+    Peer.find((err, peerData) => {
+        if (!err) {
+            res.send(peerData);
+        } else {
+            res.send(err);
+        }
+    })
+})
 
 // OTP
 
