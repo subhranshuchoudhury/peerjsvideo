@@ -25,7 +25,6 @@ let peer = new Peer({
 peer.on('open', (id) => {
     logMessage('My peer ID is: ' + id);
     console.log("Peer ID: " + id);
-    console.log(typeof (id));
     $(document).ready(function () {
         $.post("/update-peer",
             {
@@ -98,7 +97,7 @@ function loadData() {
 
 loadData();
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><Copy this: ${message.peer}</td><td>${message.time}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td>Copy this: ${message.peer}</td><td>${message.time}</td></tr>`;
     tableView.appendChild(msgNode);
 }
 
