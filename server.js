@@ -51,12 +51,13 @@ mongoose.connect(process.env.DB_URL);
 const userSkeliton = new mongoose.Schema({
     email: String,
     password: String,
-    time: String
 }); // schema
 
 const PeerSchema = new mongoose.Schema({
     email: String,
-    peer: String
+    peer: String,
+    time: String
+
 
 });
 
