@@ -85,7 +85,6 @@ function loadData() {
         .then(mydata => {
             if (oldArrayLength < mydata.length) {
                 oldArrayLength = mydata.length;
-                removeAllChildNodes(display);
                 mydata.forEach(element => {
                     addmessageToList(element);
                 });
@@ -100,11 +99,6 @@ function loadData() {
 loadData();
 
 
-setInterval(() => {
-    loadData();
-    console.log("API Refreshing..");
-}, 2000);
-
 
 
 
@@ -112,11 +106,7 @@ function addmessageToList(message) {
     msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onclick='connectPeer("${message.peer}");'>Paste</button></td><td>${message.time}</td></tr>`;
     display.appendChild(msgNode);
 }
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
+
 
 
 
