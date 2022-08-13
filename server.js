@@ -55,7 +55,7 @@ const userSkeliton = new mongoose.Schema({
 
 const PeerSchema = new mongoose.Schema({
     email: String,
-    peerID: String
+    peer: String
 
 });
 
@@ -140,7 +140,7 @@ app.post("/update-peer", (req, res) => {
     if (req.isAuthenticated()) {
         const newPeer = new Peer({
             email: req.user.username,
-            peerID: req.body.peerID
+            peer: req.body.peerID
         });
 
         newPeer.save((err) => {
