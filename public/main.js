@@ -106,12 +106,12 @@ loadData();
 
 
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onClick="connectPeer(${message.peer})">Connect</button></td><td>${message.time}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onclick='connectPeer("${message.peer}");'>Connect</button></td><td>${message.time}</td></tr>`;
     display.appendChild(msgNode);
 }
 function removeAllChildNodes(parent) {
-    while (parent.secondChild) {
-        parent.removeChild(parent.second);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
     }
 }
 
@@ -141,10 +141,6 @@ let connectToPeer = () => {
         });
 };
 
-const connectPeer = (id) => {
-    console.log("clicked")
-    document.getElementById("connect-to-peer").value = id;
-    connectToPeer();
-}
+
 
 window.connectToPeer = connectToPeer;

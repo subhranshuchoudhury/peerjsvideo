@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         res.render("home");
     } else {
-        res.redirect("register");
+        res.redirect("/login");
     }
 
 });

@@ -18,6 +18,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/main.js" type="module" defer></script>
+    <script type="text/javascript">
+        function connectPeer(id) {
+            console.log("clicked")
+            const peerid = document.getElementById("connect-to-peer");
+            peerid.value = id;
+            connectToPeer();
+        }
+    </script>
 </head>
 
 <body>
@@ -32,7 +40,8 @@
     <div class="messages">
     </div>
     <center>
-        <div>
+        <h3>Registered User</h3>
+        <div class="userHolder">
             <table id="display"></table>
         </div>
     </center>

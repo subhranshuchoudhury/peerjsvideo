@@ -59,21 +59,46 @@ footer {
 
 .messages {
     color: #eee;
+    margin-bottom: 100px;
 }
 
-table {
-    font-family: arial, sans-serif;
+h3 {
+    color: #ddd;
+}
+
+.userHolder {
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+
+
+#display {
+    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-td,
-th {
-    border: 1px solid #dddddd;
-    text-align: left;
+#display td,
+#display th {
+    border: 1px solid #ddd;
     padding: 8px;
+    color: white;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
+#display tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#display tr:hover {
+    background-color: #ddd;
+}
+
+#display th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
 }
