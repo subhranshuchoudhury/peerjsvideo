@@ -74,7 +74,7 @@
                 if (document.getElementById("userinputOTP").value == OTP) {
                     document.getElementById("submit").style.display = "";
                     document.getElementById("verifyOTP").style.display = "none";
-                    alert("Correct OTP. :)");
+                    // alert("Correct OTP. :)");
                     $.post("/register",
                         {
                             username: emailid.value,
@@ -91,17 +91,11 @@
         });
 
         // register -- already in verify otp
-        // $(document).ready(function () {
-        //     $("#submit").click(function () {
-        //         $.post("/test",
-        //             {
-        //                 username: emailid.value,
-        //                 password: password.value
-        //             },
-        //             function (data, status) {
-        //             });
-        //     });
-        // });
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                window.location.replace("/home");
+            });
+        });
 
 
     </script>
