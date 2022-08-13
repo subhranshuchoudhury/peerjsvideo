@@ -24,14 +24,17 @@ let peer = new Peer({
 });
 peer.on('open', (id) => {
     logMessage('My peer ID is: ' + id);
-    console.log("Peer ID: " + id)
-    $.post("/update-peer",
-        {
-            peerId: "" + id
-        },
-        function (data, status) {
-        });
+    console.log("Peer ID: " + id);
+    console.log(typeof (id));
+    $(document).ready(function () {
+        $.post("/update-peer",
+            {
+                peerId: ("" + id)
+            },
+            function (data, status) {
+            });
 
+    });
 });
 peer.on('error', (error) => {
     console.error(error);
