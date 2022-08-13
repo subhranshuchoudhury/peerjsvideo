@@ -1,5 +1,3 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,26 +5,81 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A cool thing made with Glitch">
 
     <title>VideoTalk!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
+
     <script src="/lib/peerjs.js"></script>
+    <link
+        href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAEgA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//AAAAAAAAAABIAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//wAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAAAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAEgA//9IAP//SAD//0gA//9IAP//AAAAAL1aHPO9WhzzAAAAAEgA//9IAP//SAD//0gA//9IAP//AAAAAAAAAABIAP//SAD//0gA//9IAP//SAD//wAAAAC9WhzzvVoc8wAAAABIAP//SAD//0gA//9IAP//SAD//wAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAAAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAEgA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//AAAAAAAAAABIAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//wAAAAAAAAAASAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//9IAP//SAD//0gA//8AAAAAAAAAAAAAAAC9WhzzvVoc871aHPMAAAAAAAAAAAAAAAAAAAAASAD//wAAAAAAAAAAAAAAAEgA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgA//9IAP//SAD//0gA//9IAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAAgAEAAIABAACAAQAAg8EAAIJBAACCQQAAg8EAAIABAACAAQAAgAEAAMe7AAD/gwAA//8AAA=="
+        rel="icon" type="image/x-icon" />
     <!-- https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/main.js" type="module" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+
 </head>
 
 <body>
-    <video class="remote-video" autoplay></video>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🎥 VidTalk</a>
+
+            <button class="navbar-toggler" style="margin-right:5px !important;" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse top_nav" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                        <hr class="hr_nav">
+                    </li>
+                    <li class="nav-item "><a href="https://about.me/subhranshu" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item "><a href="mailto:subhransuchoudhury00@gmail.com" class="nav-link">Contact
+                            Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar navbar-nav navbar-right" style="display:flex;">
+                    <li>
+                        <a href="/login" type="button" class="btn top_login">
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/register" type="button" class="btn sign_btn">
+                            SignUp
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout" type="button" class="btn sign_btn">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <center>
+        <video class="remote-video" autoplay></video>
+        <br>
         <input placeholder="📹 Paste connection ID..." type="text" id="connect-to-peer" />
         <button type="button" class="btn connectbtn btn-success" onclick="connectToPeer()">
             Connect
         </button>
+        <br>
+        <div id="myCam">
+            <video autoplay="true" id="videoElement">
+            </video>
+        </div>
+
     </center>
 
     <div class="messages">
@@ -35,7 +88,8 @@
     <div class="userHolder">
         <center>
             <table id="display"></table>
-
         </center>
     </div>
-    <%- include('partials/footer') %>
+</body>
+
+</html>

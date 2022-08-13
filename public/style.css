@@ -1,20 +1,11 @@
-/* this file is loaded by index.html and styles the page */
-
-* {
-    box-sizing: border-box;
-    /* background-color: #554994; */
-}
-
 body {
     font-family: sans-serif;
-    margin: 2em 1em;
-    line-height: 1.5em;
-    background-color: #19181c;
+    background-color: antiquewhite;
 }
 
 h1 {
     font-style: italic;
-    color: white;
+    color: black;
     max-width: calc(100% - 5rem);
     line-height: 1.1;
 }
@@ -24,7 +15,7 @@ form {
     display: grid;
     grid-gap: 1em;
     padding: 1em;
-    max-width: 40ch;
+    /* max-width: 40ch; */
 }
 
 input {
@@ -63,14 +54,28 @@ footer {
 }
 
 h3 {
-    color: #ddd;
+    color: #666;
 }
 
 .userHolder {
     height: 300px;
     width: 100%;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
+}
+
+video {
+    border-radius: 23px;
+}
+
+#videoElement {
+    width: 100px;
+    height: 100px;
+    background-color: #666;
+}
+
+#myCam {
+    margin-top: 100px;
 }
 
 table {
@@ -92,16 +97,13 @@ table {
 #display th {
     border: 1px solid #ddd;
     padding: 8px;
-    color: white;
+    color: black;
 }
 
 #display tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#display tr:hover {
-    background-color: #ddd;
-}
 
 #display th {
     padding-top: 12px;
@@ -112,5 +114,5 @@ table {
 }
 
 b {
-    color: white;
+    color: black;
 }

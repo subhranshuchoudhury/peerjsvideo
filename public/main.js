@@ -1,29 +1,36 @@
-// client-side js, loaded by index.html
-// run by the browser each time the page is loaded
-
 let Peer = window.Peer;
-
 let messagesEl = document.querySelector('.messages');
 let peerIdEl = document.querySelector('#connect-to-peer');
 let videoEl = document.querySelector('.remote-video');
-
 let logMessage = (message) => {
     let newMessage = document.createElement('div');
     newMessage.innerText = message;
     messagesEl.appendChild(newMessage);
 };
 
+//
+const video = document.querySelector("#videoElement");
+if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+            video.srcObject = stream;
+        })
+        .catch(function (error) {
+            console.log("Something went wrong!");
+        });
+}
+
 let renderVideo = (stream) => {
     videoEl.srcObject = stream;
 };
 
-// Register with the peer server
+
 let peer = new Peer({
     host: '/',
     path: '/peerjs/myapp'
 });
 peer.on('open', (id) => {
-    logMessage('My peer ID is: ' + id);
+    logMessage('🆔 Your Peer ID is: ' + id);
     console.log("Peer ID: " + id);
     $(document).ready(function () {
         $.post("/update-peer",
@@ -39,14 +46,14 @@ peer.on('error', (error) => {
     console.error(error);
 });
 
-// Handle incoming data connection
+
 peer.on('connection', (conn) => {
-    logMessage('incoming peer connection!');
+    logMessage('📲 Incoming peer connection!');
     conn.on('data', (data) => {
         logMessage(`received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('--> User Connected.');
+        conn.send('🌏 Now you are connected !');
     });
 });
 
@@ -97,7 +104,7 @@ function loadData() {
 
 loadData();
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td>Copy this: ${message.peer}</td><td>${message.time}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td>Copy this: ${message.peer}</td><td>${message.time.replace("IST", "")}</td></tr>`;
     tableView.appendChild(msgNode);
 }
 
@@ -108,14 +115,14 @@ function addmessageToList(message) {
 // Initiate outgoing connection
 let connectToPeer = () => {
     let peerId = peerIdEl.value;
-    logMessage(`Connecting to ${peerId}...`);
+    logMessage(`⌛ Connecting to ${peerId}...`);
 
     let conn = peer.connect(peerId);
     conn.on('data', (data) => {
-        logMessage(`received: ${data}`);
+        logMessage(`📥 Received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('--> User Connected.');
+        conn.send('🌏 Now you are connected!');
     });
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })

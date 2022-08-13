@@ -134,6 +134,20 @@ app.post("/login", (req, res) => {
 
 });
 
+// logout
+
+app.get("/logout", (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            console.log(err);
+            res.send("Something went wrong! Kindy retry or conatct subhranshu choudhury.")
+        } else {
+            res.redirect("/login");
+
+        }
+    });
+});
+
 // set the peer id
 
 app.post("/update-peer", (req, res) => {
