@@ -2,17 +2,19 @@
 
 * {
     box-sizing: border-box;
+    /* background-color: #554994; */
 }
 
 body {
     font-family: sans-serif;
     margin: 2em 1em;
     line-height: 1.5em;
+    background-color: #554994;
 }
 
 h1 {
     font-style: italic;
-    color: #373fff;
+    color: white;
     max-width: calc(100% - 5rem);
     line-height: 1.1;
 }
@@ -53,4 +55,8 @@ footer {
     margin-top: 3em;
     padding-top: 1.5em;
     border-top: 1px solid lightgrey;
+}
+
+.messages {
+    color: #eee;
 }

@@ -72,13 +72,11 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => { res.header({ "Access-Control-Allow-Origin": "*" }); next(); })
 
 //..
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         res.render("home");
-
     } else {
         res.redirect("register");
-
     }
 
 });
@@ -93,7 +91,7 @@ app.post("/register", (req, res) => {
             res.redirect("/register");
         } else {
             passport.authenticate("local")(req, res, () => {
-                res.redirect("/home");
+                res.redirect("/");
             });
         }
     });
@@ -109,7 +107,7 @@ app.get("/register", (req, res) => {
 
 app.get("/login", (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect("/home");
+        res.redirect("/");
     } else {
         res.render("login");
 
@@ -127,7 +125,7 @@ app.post("/login", (req, res) => {
             console.log(err);
         } else {
             passport.authenticate("local")(req, res, () => {
-                res.redirect("/home");
+                res.redirect("/");
             });
         }
     });

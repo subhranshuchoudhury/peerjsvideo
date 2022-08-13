@@ -10,21 +10,21 @@
                         <!-- Makes POST request to /register route -->
                         <form onsubmit="return false">
                             <div class="form-group">
-                                <label for="username">Email ID:</label>
-                                <input type="email" class="form-control" id="Email" name="username">
+                                <label for="username">Email</label>
+                                <input placeholder="example@gmail.com" type="email" class="form-control" id="Email"
+                                    name="username">
                             </div>
                             <div class="form-group">
-                                <label for="password">Password:</label>
+                                <label for="password">Password</label>
                                 <input type="password" class="form-control" id="Pass" name="password">
                             </div>
                             <div class="form-group">
                                 <label for="otp">OTP:</label>
                                 <input type="number" class="form-control" name="otp" id="userinputOTP">
                             </div>
-                            <button id="submit" class="btn btn-dark">Register</button>
-                            <button id="verifyOTP" class="btn btn-dark">Verify OTP</button>
-                            <button id="letsgo" class="btn btn-dark">Lets Go!</button>
-                            <button id="sendOTP" class="btn btn-dark">Send OTP!</button>
+                            <button id="submit" class="btn btn-dark">🥳 Register</button>
+                            <button id="verifyOTP" class="btn btn-dark">🔍 Verify OTP</button>
+                            <button id="sendOTP" class="btn btn-dark">📤 Send OTP!</button>
 
 
                         </form>
@@ -40,7 +40,6 @@
 
     <script>
         document.getElementById("submit").style.display = "none";
-        document.getElementById("letsgo").style.display = "none";
         document.getElementById("userinputOTP").style.display = "none";
         document.getElementById("verifyOTP").style.display = "none";
         let emailid = document.getElementById("Email");
@@ -90,10 +89,10 @@
             });
         });
 
-        // register -- already in verify otp
+        // redirect to home.
         $(document).ready(function () {
             $("#submit").click(function () {
-                window.location.replace("/home");
+                window.location.replace("/");
             });
         });
 
