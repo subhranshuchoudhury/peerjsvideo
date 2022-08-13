@@ -63,6 +63,61 @@ peer.on('call', (call) => {
         });
 });
 
+// fetch the peers data.
+
+const tableView = document.getElementById("display");
+let msgNode = document.createElement("table");
+msgNode.innerHTML = "<tr><th>Name</th><th>Peer</th><th>Last Online</th></tr>";
+
+
+let oldArrayLength = 0;
+function loadData() {
+    const URL = "https://peerjsconnect.herokuapp.com/peers";
+    const getPosts = async () => {
+        const response = await fetch(URL);
+        if (!response.ok) {
+            console.log("error!");
+        }
+        const data = await response.json();
+        return data;
+    }
+    getPosts()
+        .then(mydata => {
+            if (oldArrayLength < mydata.length) {
+                oldArrayLength = mydata.length;
+                removeAllChildNodes(display);
+                mydata.forEach(element => {
+                    addmessageToList(element);
+                });
+            }
+        })
+        .catch(error => {
+            console.log("error.");
+        });
+
+}
+
+setInterval(() => {
+    loadData();
+}, 5000);
+
+loadData();
+
+
+
+function addmessageToList(message) {
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onClick="connectPeer(${message.peer})">Connect</button></td><td>${message.time}</td></tr>`;
+    display.appendChild(msgNode);
+}
+function removeAllChildNodes(parent) {
+    while (parent.secondChild) {
+        parent.removeChild(parent.second);
+    }
+}
+
+
+
+
 // Initiate outgoing connection
 let connectToPeer = () => {
     let peerId = peerIdEl.value;
@@ -85,5 +140,11 @@ let connectToPeer = () => {
             logMessage('Failed to get local stream', err);
         });
 };
+
+const connectPeer = (id) => {
+    console.log("clicked")
+    document.getElementById("connect-to-peer").value = id;
+    connectToPeer();
+}
 
 window.connectToPeer = connectToPeer;

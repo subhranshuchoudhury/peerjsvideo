@@ -17,7 +17,7 @@
     <!-- https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/main.js" type="module"></script>
+    <script src="/main.js" type="module" defer></script>
 </head>
 
 <body>
@@ -31,4 +31,9 @@
 
     <div class="messages">
     </div>
+    <center>
+        <div>
+            <table id="display"></table>
+        </div>
+    </center>
     <%- include('partials/footer') %>
