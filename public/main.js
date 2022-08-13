@@ -97,16 +97,19 @@ function loadData() {
 
 }
 
+loadData();
+
+
 setInterval(() => {
     loadData();
-}, 5000);
+    console.log("API Refreshing..");
+}, 2000);
 
-loadData();
 
 
 
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onclick='connectPeer("${message.peer}");'>Connect</button></td><td>${message.time}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button type="button" class="btn btn-success" onclick='connectPeer("${message.peer}");'>Paste</button></td><td>${message.time}</td></tr>`;
     display.appendChild(msgNode);
 }
 function removeAllChildNodes(parent) {

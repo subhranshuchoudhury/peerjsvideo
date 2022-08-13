@@ -9,7 +9,7 @@ body {
     font-family: sans-serif;
     margin: 2em 1em;
     line-height: 1.5em;
-    background-color: #554994;
+    background-color: #19181c;
 }
 
 h1 {
@@ -68,16 +68,24 @@ h3 {
 
 .userHolder {
     height: 300px;
-    overflow: scroll;
+    width: 100%;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 
-
-
-#display {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
+table {
     width: 100%;
+}
+
+#connect-to-peer {
+    border-radius: 23px;
+    width: 60%;
+    display: inline;
+}
+
+.connectbtn {
+    display: inline;
+    border-radius: 23px;
 }
 
 #display td,
@@ -100,5 +108,9 @@ h3 {
     padding-bottom: 12px;
     text-align: center;
     background-color: #04AA6D;
+    color: white;
+}
+
+b {
     color: white;
 }
