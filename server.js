@@ -140,7 +140,7 @@ app.post("/update-peer", (req, res) => {
     if (req.isAuthenticated()) {
         const newPeer = new Peer({
             email: req.user.username,
-            peer: req.body.peerID
+            peer: req.body.peerid
         });
 
         newPeer.save((err) => {
