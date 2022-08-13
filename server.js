@@ -141,7 +141,7 @@ app.post("/update-peer", (req, res) => {
 
         Peer.findOne({ email: req.user.username }, (err, data) => {
             if (data) {
-                data.peer = req.body.peerid;
+                Peer.findOneAndUpdate({ email: req.user.username }, { $set: { peer: req.body.peerid } });
             } else {
                 if (!err) {
                     const newPeer = new Peer({
@@ -157,6 +157,8 @@ app.post("/update-peer", (req, res) => {
                         }
 
                     });
+                } else {
+                    res.send(err);
                 }
             }
         })
