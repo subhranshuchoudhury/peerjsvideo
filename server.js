@@ -137,7 +137,7 @@ app.post("/login", (req, res) => {
 // set the peer id
 
 app.post("/update-peer", (req, res) => {
-    if (isAuthenticated) {
+    if (req.isAuthenticated()) {
         const newPeer = new Peer({
             email: req.user.username,
             peerID: req.body.peerID
