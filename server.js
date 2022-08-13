@@ -141,7 +141,15 @@ app.post("/update-peer", (req, res) => {
 
         Peer.findOne({ email: req.user.username }, (err, data) => {
             if (data) {
-                Peer.findOneAndUpdate({ email: req.user.username }, { $set: { peer: req.body.peerid } });
+                Peer.updateOne({ email: req.user.username }, { $set: { peer: req.body.peerid } }, (err) => {
+                    if (err) {
+                        res.send(err);
+                        console.log("Error! PUT method");
+                    } else {
+                        res.send("Data updated successfully.");
+                        console.log("Data updated successfully.PUT method!")
+                    }
+                });
             } else {
                 if (!err) {
                     const newPeer = new Peer({
