@@ -106,8 +106,8 @@ loadData();
 
 const refreshAPI = document.getElementById("refreshAPI");
 refreshAPI.addEventListener("click", () => {
-    
     removeAllChildNodes(messagesEl);
+    removeAllChildNodes(msgNode);
     loadData();
 })
 
