@@ -78,7 +78,7 @@ let msgNode = document.createElement("table");
 msgNode.innerHTML = "<tr><th>Name</th><th>Peer ID</th><th>Last Seen</th></tr>";
 
 
-let oldArrayLength = 0;
+
 function loadData() {
     const URL = `${window.location.href}peers`;
     const getPosts = async () => {
@@ -91,12 +91,9 @@ function loadData() {
     }
     getPosts()
         .then(mydata => {
-            if (oldArrayLength < mydata.length) {
-                oldArrayLength = mydata.length;
-                mydata.forEach(element => {
-                    addmessageToList(element);
-                });
-            }
+            mydata.forEach(element => {
+                addmessageToList(element);
+            });
         })
         .catch(error => {
             console.log("error.");
@@ -105,8 +102,22 @@ function loadData() {
 }
 
 loadData();
+
+const refreshAPI = document.getElementById("refreshAPI");
+refreshAPI.addEventListener("click", () => {
+    removeAllChildNodes(tableView);
+    removeAllChildNodes(messagesEl);
+    loadData();
+})
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button class="btn btn-danger" onclick="copyThis('${message.peer}')">Copy ID</button></td><td>${message.time.replace("IST", "")}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button class="btn btn-danger" onclick="copyThis('${message.peer}')">Copy</button></td><td>${message.time.replace("IST", "")}</td></tr>`;
     tableView.appendChild(msgNode);
 }
 

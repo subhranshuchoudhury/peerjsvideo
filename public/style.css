@@ -86,6 +86,10 @@ video {
     max-width: 100%;
 }
 
+#refreshAPI {
+    margin: 10px;
+}
+
 #myCam {
     margin-top: 10px;
     text-align: center;
