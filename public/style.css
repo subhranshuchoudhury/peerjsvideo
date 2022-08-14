@@ -49,7 +49,11 @@ footer {
 }
 
 .messages {
-    color: black;
+    background-color: black;
+    width: 70%;
+    padding: 8px;
+    border-radius: 23px;
+    color: whitesmoke;
     margin-bottom: 100px;
 }
 
@@ -64,20 +68,30 @@ h3 {
     overflow-x: scroll;
 }
 
-video {
-    border-radius: 23px;
+.navbar-brand b {
+    color: rgb(94, 108, 175);
 }
+
+
+
 
 #videoElement {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+}
+
+video {
     background-color: #666;
 }
 
 #myCam {
-    display: inline-block;
     margin-top: 10px;
-    text-align: left;
+    text-align: center;
+}
+
+#endCall {
+    margin: 30px;
 }
 
 table {

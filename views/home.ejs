@@ -35,7 +35,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">🎥 VidTalk</a>
+            <a class="navbar-brand" href="/"><b>🎥 PeerJsConnect</b></a>
 
             <button class="navbar-toggler" style="margin-right:5px !important;" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent">
@@ -82,6 +82,9 @@
     <center>
         <video class="remote-video" autoplay></video>
         <br>
+        <button type="button" class="btn btn-danger" id="endCall" onclick="window.location.reload();">📞 End
+            Call</button>
+        <br>
         <input placeholder="📹 Paste Peer ID..." type="text" id="connect-to-peer" />
         <button type="button" class="btn connectbtn btn-success" onclick="connectToPeer()">
             Connect
@@ -89,8 +92,7 @@
         <br>
 
 
-        <button type="button" class="btn btn-danger" onclick="window.location.reload();">📞 End
-            Call</button>
+
 
 
 

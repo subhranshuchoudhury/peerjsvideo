@@ -34,7 +34,6 @@ let peer = new Peer({
 });
 peer.on('open', (id) => {
     logMessage('🆔 Your Peer ID: ' + id);
-    console.log("Peer ID: " + id);
     $(document).ready(function () {
         $.post("/update-peer",
             {
@@ -81,7 +80,7 @@ msgNode.innerHTML = "<tr><th>Name</th><th>Peer ID</th><th>Last Seen</th></tr>";
 
 let oldArrayLength = 0;
 function loadData() {
-    const URL = `${window.location.href}/peers`;
+    const URL = `${window.location.href}peers`;
     const getPosts = async () => {
         const response = await fetch(URL);
         if (!response.ok) {
