@@ -8,46 +8,19 @@ let logMessage = (message) => {
     messagesEl.appendChild(newMessage);
 };
 
-//
+// user front camera
 const video = document.querySelector("#videoElement");
 if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
             video.srcObject = stream;
         })
         .catch(function (error) {
-            console.log("Something went wrong!");
+            console.log("😓 Something went wrong!");
         });
 }
 
-const stop = (media) => {
-    const stream = video.srcObject;
-    const tracks = stream.getTracks();
-    const toggleAButton = document.getElementById("audioBtn");
-    const toggleVButton = document.getElementById("videoBtn");
-    if (media === "audio") {
-        if (tracks[0].enabled) {
-            tracks[0].enabled = false;
-            toggleAButton.innerHTML = "🎙️ Unmute";
-        } else {
-            tracks[0].enabled = true;
-            toggleAButton.innerHTML = "🔇Mute";
 
-        }
-    } else if (media === "video") {
-        if (tracks[1].enabled) {
-            tracks[1].enabled = false;
-            toggleVButton.innerHTML = "📷 Unmute Video";
-        } else {
-            tracks[1].enabled = true;
-            toggleVButton.innerHTML = "📷 Mute Video";
-
-        }
-
-    }
-
-
-}
 let renderVideo = (stream) => {
     videoEl.srcObject = stream;
 };
@@ -60,7 +33,7 @@ let peer = new Peer({
     path: '/peerjs/myapp'
 });
 peer.on('open', (id) => {
-    logMessage('🆔 Your Peer ID is: ' + id);
+    logMessage('🆔 Your Peer ID: ' + id);
     console.log("Peer ID: " + id);
     $(document).ready(function () {
         $.post("/update-peer",
@@ -108,7 +81,7 @@ msgNode.innerHTML = "<tr><th>Name</th><th>Peer ID</th><th>Last Seen</th></tr>";
 
 let oldArrayLength = 0;
 function loadData() {
-    const URL = "https://peerjsconnect.herokuapp.com/peers";
+    const URL = `${window.location.href}/peers`;
     const getPosts = async () => {
         const response = await fetch(URL);
         if (!response.ok) {
@@ -134,7 +107,7 @@ function loadData() {
 
 loadData();
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button onclick="copyThis('${message.peer}')">${message.peer}</button></td><td>${message.time.replace("IST", "")}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button class="btn btn-danger" onclick="copyThis('${message.peer}')">Copy ID</button></td><td>${message.time.replace("IST", "")}</td></tr>`;
     tableView.appendChild(msgNode);
 }
 
