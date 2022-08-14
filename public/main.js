@@ -11,7 +11,7 @@ let logMessage = (message) => {
 //
 const video = document.querySelector("#videoElement");
 if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         .then(function (stream) {
             video.srcObject = stream;
         })
@@ -20,9 +20,39 @@ if (navigator.mediaDevices.getUserMedia) {
         });
 }
 
+const stop = (media) => {
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+    const toggleAButton = document.getElementById("audioBtn");
+    const toggleVButton = document.getElementById("videoBtn");
+    if (media === "audio") {
+        if (tracks[0].enabled) {
+            tracks[0].enabled = false;
+            toggleAButton.innerHTML = "🎙️ Unmute";
+        } else {
+            tracks[0].enabled = true;
+            toggleAButton.innerHTML = "🔇Mute";
+
+        }
+    } else if (media === "video") {
+        if (tracks[1].enabled) {
+            tracks[1].enabled = false;
+            toggleVButton.innerHTML = "📷 Unmute Video";
+        } else {
+            tracks[1].enabled = true;
+            toggleVButton.innerHTML = "📷 Mute Video";
+
+        }
+
+    }
+
+
+}
 let renderVideo = (stream) => {
     videoEl.srcObject = stream;
 };
+
+
 
 
 let peer = new Peer({

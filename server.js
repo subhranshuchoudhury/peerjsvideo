@@ -14,12 +14,12 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const app = express();
 const { ExpressPeerServer } = require("peer");
-// For time-stamp in chat.
+// For time-stamp of last logins.
 
 function timestamp() {
     let d = new Date();
     let ISTTime = new Date(d.getTime() + (330 + d.getTimezoneOffset()) * 60000);
-    let timeStamp = `[${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours() >= 12 ? "PM" : "AM"} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} IST]`;
+    let timeStamp = `${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours() >= 12 ? "PM" : "AM"} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
     return timeStamp;
 }
 
@@ -32,12 +32,10 @@ smtpProtocol = mailer.createTransport({
     }
 });
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-// https://expressjs.com/en/starter/basic-routing.html
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,

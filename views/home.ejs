@@ -27,6 +27,7 @@
             let cb = document.getElementById("connect-to-peer");
             cb.value = id;
         }
+
     </script>
 
 </head>
@@ -81,23 +82,29 @@
     <center>
         <video class="remote-video" autoplay></video>
         <br>
-        <input placeholder="📹 Paste connection ID..." type="text" id="connect-to-peer" />
+        <input placeholder="📹 Paste Peer ID..." type="text" id="connect-to-peer" />
         <button type="button" class="btn connectbtn btn-success" onclick="connectToPeer()">
             Connect
         </button>
         <br>
 
+        <div class="videoOperaions">
+            <button type="button" class="btn btn-danger" onclick="stop('audio');" id="audioBtn">🔇Mute Audio</button>
+            <button type="button" class="btn btn-danger" onclick="stop('video');" id="videoBtn">📷 Mute Video</button>
+            <button type="button" class="btn btn-danger" onclick="window.location.reload();">📞 End
+                Call</button>
+        </div>
 
+
+
+        <div class="messages">
+        </div>
+        <h3>Registered Users</h3>
+        <div class="userHolder">
+            <table id="display"></table>
+        </div>
     </center>
 
-    <div class="messages">
-    </div>
-    <h3>Registered User</h3>
-    <div class="userHolder">
-        <center>
-            <table id="display"></table>
-        </center>
-    </div>
 </body>
 
 </html>
