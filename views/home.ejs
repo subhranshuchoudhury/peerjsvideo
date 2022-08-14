@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>VideoTalk!</title>
 
@@ -22,6 +22,12 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style.css">
+    <script>
+        function copyThis(id) {
+            let cb = document.getElementById("connect-to-peer");
+            cb.value = id;
+        }
+    </script>
 
 </head>
 
@@ -67,6 +73,11 @@
         </div>
     </nav>
 
+    <div id="myCam">
+        <video autoplay="true" id="videoElement">
+        </video>
+    </div>
+
     <center>
         <video class="remote-video" autoplay></video>
         <br>
@@ -75,10 +86,7 @@
             Connect
         </button>
         <br>
-        <div id="myCam">
-            <video autoplay="true" id="videoElement">
-            </video>
-        </div>
+
 
     </center>
 

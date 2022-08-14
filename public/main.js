@@ -48,12 +48,12 @@ peer.on('error', (error) => {
 
 
 peer.on('connection', (conn) => {
-    logMessage('📲 Incoming peer connection!');
+    logMessage('📲 Incoming peer connection!...');
     conn.on('data', (data) => {
         logMessage(`received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('🌏 Now you are connected !');
+        conn.send('🌏 Now you are connected !...');
     });
 });
 
@@ -65,7 +65,7 @@ peer.on('call', (call) => {
             call.on('stream', renderVideo);
         })
         .catch((err) => {
-            console.error('Failed to get local stream', err);
+            console.error('😢 Failed to get local stream', err);
         });
 });
 
@@ -73,7 +73,7 @@ peer.on('call', (call) => {
 
 const tableView = document.getElementById("display");
 let msgNode = document.createElement("table");
-msgNode.innerHTML = "<tr><th>Name</th><th>Peer</th><th>Last Online</th></tr>";
+msgNode.innerHTML = "<tr><th>Name</th><th>Peer ID</th><th>Last Seen</th></tr>";
 
 
 let oldArrayLength = 0;
@@ -104,7 +104,7 @@ function loadData() {
 
 loadData();
 function addmessageToList(message) {
-    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td>Copy this: ${message.peer}</td><td>${message.time.replace("IST", "")}</td></tr>`;
+    msgNode.innerHTML += `<tr><td>${message.email.replace("@gmail.com", "")}</td><td><button onclick="copyThis('${message.peer}')">${message.peer}</button></td><td>${message.time.replace("IST", "")}</td></tr>`;
     tableView.appendChild(msgNode);
 }
 
@@ -122,7 +122,7 @@ let connectToPeer = () => {
         logMessage(`📥 Received: ${data}`);
     });
     conn.on('open', () => {
-        conn.send('🌏 Now you are connected!');
+        conn.send('🌏 Now you are connected!...');
     });
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -131,7 +131,7 @@ let connectToPeer = () => {
             call.on('stream', renderVideo);
         })
         .catch((err) => {
-            logMessage('Failed to get local stream', err);
+            logMessage('😢 Failed to get local stream...', err);
         });
 };
 
