@@ -91,7 +91,6 @@ function loadData() {
     }
     getPosts()
         .then(mydata => {
-            removeAllChildNodes(tableView);
             mydata.forEach(element => {
                 addmessageToList(element);
             });
@@ -106,8 +105,8 @@ loadData();
 
 const refreshAPI = document.getElementById("refreshAPI");
 refreshAPI.addEventListener("click", () => {
+    removeAllChildNodes(tableView);
     removeAllChildNodes(messagesEl);
-    removeAllChildNodes(msgNode);
     loadData();
 })
 
