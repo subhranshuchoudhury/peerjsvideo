@@ -106,6 +106,7 @@ loadData();
 const refreshAPI = document.getElementById("refreshAPI");
 refreshAPI.addEventListener("click", () => {
     removeAllChildNodes(tableView);
+    removeAllChildNodes(msgNode);
     removeAllChildNodes(messagesEl);
     loadData();
 })
